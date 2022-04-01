@@ -20,13 +20,49 @@ $query = mysqli_query($con, $sql);
 </head>
 
 <body>
+    
     <div class="conteiner mt-5">
         <div class="row">
-            <div class="col-md-3">
-                <h1>Formulario</h1>
+            <div class="col-md-4 p-4">
+                <h2>Ingresar Datos</h2>
+                <form action="insertar.php" method="POST">
+                    <input type="text" class="form-control mb-3" name="cod_estudiante" placeholder="Código">
+                    <input type="text" class="form-control mb-3" name="dni" placeholder="Dni">
+                    <input type="text" class="form-control mb-3" name="nombres" placeholder="Nombres">
+                    <input type="text" class="form-control mb-3" name="apellidos" placeholder="Apellidos">
+
+                    <input type="submit" class="btn btn-primary" name="">
+                </form>
             </div>
-            <div class="col-md-8">
-                <h2>Mostrar tabla</h2>
+            <div class="col-md-7">
+               <table class="col-md-8 table">
+                   <thead class="table-success table-striped">
+                    <tr>
+                        <th>Código</th>
+                        <th>Dni</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                   </thead>
+
+                   <tbody>
+                       <?php               
+                       while($row=mysqli_fetch_array($query)){
+                       ?>
+                       <tr>
+                           <th><?php echo $row['cod_estudiante'] ?></th>
+                           <th><?php echo $row['dni'] ?></th>
+                           <th><?php echo $row['nombres'] ?></th>
+                           <th><?php echo $row['apellidos'] ?></th>
+                           <th><a href="actualizar.php?id=<?php echo $row['cod_estudiante'] ?>" class="btn btn-info">Editar</a></th>
+                           <th><a href="delete.php?id=<?php echo $row['cod_estudiante'] ?>" class="btn btn-danger">Eliminar</a></th>
+                           
+                       </tr>
+                       <?php } ?>
+                   </tbody>
+               </table>
             </div>
         </div>
     </div>
